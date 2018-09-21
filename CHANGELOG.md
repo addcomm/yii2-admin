@@ -4,7 +4,7 @@ Yii2 Admin Change Log
 2.8.2
 -----
 
-- Chg: AddComm fork
+- Chg: AddComm fork commit
 
 
 2.5
