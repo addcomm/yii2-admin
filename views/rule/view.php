@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -10,29 +11,39 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Rules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+AppAsset::register($this);
+
 ?>
-<div class="auth-item-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<section class="content">
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-body">
+            <div class="auth-item-view">
 
-    <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?php
-        echo Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->name], [
-            'class' => 'btn btn-danger',
-            'data-confirm' => Yii::t('rbac-admin', 'Are you sure to delete this item?'),
-            'data-method' => 'post',
-        ]);
-        ?>
-    </p>
+                <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php
-    echo DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'name',
-            'className',
-        ],
-    ]);
-    ?>
-</div>
+                <p>
+                    <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+                    <?php
+                    echo Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->name], [
+                        'class' => 'btn btn-danger',
+                        'data-confirm' => Yii::t('rbac-admin', 'Are you sure to delete this item?'),
+                        'data-method' => 'post',
+                    ]);
+                    ?>
+                </p>
+
+                <?php
+                echo DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        'name',
+                        'className',
+                    ],
+                ]);
+                ?>
+            </div>
+        </div>
+    </div>
+</section>

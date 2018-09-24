@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use backend\assets\AppAsset;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -12,6 +12,7 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('rbac-admin', 'Assignments');
 $this->params['breadcrumbs'][] = $this->title;
+AppAsset::register($this);
 
 $columns = [
     ['class' => 'yii\grid\SerialColumn'],
@@ -21,22 +22,29 @@ if (!empty($extraColumns)) {
     $columns = array_merge($columns, $extraColumns);
 }
 $columns[] = [
-    'class' => 'yii\grid\ActionColumn',
+    'class' => 'backend\components\grid\CActionColumn',
     'template' => '{view}'
 ];
+
 ?>
-<div class="assignment-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<section class="content">
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-body">
+            <div class="assignment-index">
 
-    <?php Pjax::begin(); ?>
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => $columns,
-    ]);
-    ?>
-    <?php Pjax::end(); ?>
+                <?php Pjax::begin(); ?>
+                <?=
+                GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'columns' => $columns,
+                ]);
+                ?>
+                <?php Pjax::end(); ?>
 
-</div>
+            </div>
+        </div>
+    </div>
+</section>

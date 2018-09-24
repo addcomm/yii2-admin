@@ -2,9 +2,12 @@
 
 namespace mdm\admin\components;
 
+use common\components\Tools;
+use common\models\AuthItemChild;
 use Yii;
 use mdm\admin\models\AuthItem;
 use mdm\admin\models\searchs\AuthItem as AuthItemSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\base\NotSupportedException;
@@ -20,7 +23,7 @@ use yii\rbac\Item;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class ItemController extends Controller
+class ItemController extends \mdm\admin\Components\Yii2adminController
 {
 
     /**
@@ -79,7 +82,9 @@ class ItemController extends Controller
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         } else {
-            return $this->render('create', ['model' => $model]);
+            //get the routes related to this role.
+            $modelRoutes = ArrayHelper::map(AuthItemChild::findAll(['parent'=>$model->name]),'child','rights');
+            return $this->render('create', ['model' => $model,'modelRoutes'=>$modelRoutes]);
         }
     }
 
@@ -92,11 +97,48 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+
+        if(!empty(Yii::$app->getRequest()->post())){
+
+            if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
+
+                //import controller rights
+                if(!empty(Yii::$app->getRequest()->post('Rights'))){
+
+                    $rights = Yii::$app->getRequest()->post('Rights');
+
+                    //clear the current rights
+                    $modelAuthItem = AuthItemChild::findAll(['parent'=>$model->name]);
+
+                    foreach ($modelAuthItem as $right){
+
+                        $right->rights = null;
+                        $right->save();
+                    }
+
+                    foreach($rights as $route =>$right){
+
+                        $modelAuthItem = AuthItemChild::findOne(['parent'=>$model->name,'child'=>$route]);
+
+                        if(!empty($modelAuthItem)){
+
+                            $modelAuthItem->rights = implode(',',array_keys($right));
+
+                            if(!$modelAuthItem->save()){
+                                die(Tools::modelErrorsToString($modelAuthItem->getErrors()));
+                            }
+                        }
+                    }
+                }
+
+            }
+
         }
 
-        return $this->render('update', ['model' => $model]);
+        //get the routes related to this role.
+        $modelRoutes = ArrayHelper::map(AuthItemChild::findAll(['parent'=>$model->name]),'child','rights');
+
+        return $this->render('update', ['model' => $model,'modelRoutes'=>$modelRoutes]);
     }
 
     /**

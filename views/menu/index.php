@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -10,6 +11,7 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('rbac-admin', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
+AppAsset::register($this);
 ?>
 <div class="menu-index">
 
