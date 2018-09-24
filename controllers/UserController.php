@@ -12,7 +12,6 @@ use mdm\admin\models\User;
 use mdm\admin\models\searchs\User as UserSearch;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\base\UserException;
@@ -21,7 +20,7 @@ use yii\mail\BaseMailer;
 /**
  * User controller
  */
-class UserController extends Controller
+class UserController extends \mdm\admin\Components\Yii2adminController
 {
     private $_oldMailPath;
 

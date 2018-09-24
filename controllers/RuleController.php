@@ -4,12 +4,12 @@ namespace mdm\admin\controllers;
 
 use Yii;
 use mdm\admin\models\BizRule;
-use yii\web\Controller;
 use mdm\admin\models\searchs\BizRule as BizRuleSearch;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use mdm\admin\components\Helper;
 use mdm\admin\components\Configs;
+use common\rules;
 
 /**
  * Description of RuleController
@@ -17,7 +17,7 @@ use mdm\admin\components\Configs;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class RuleController extends Controller
+class RuleController extends \mdm\admin\Components\Yii2adminController
 {
 
     /**
@@ -69,6 +69,7 @@ class RuleController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new BizRule(null);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Helper::invalidate();

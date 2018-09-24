@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\AppAsset;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -9,6 +10,7 @@ $this->title = Yii::t('rbac-admin', 'Update Menu') . ': ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Menus'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('rbac-admin', 'Update');
+AppAsset::register($this);
 ?>
 <div class="menu-update">
 

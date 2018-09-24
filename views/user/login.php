@@ -1,4 +1,5 @@
 <?php
+use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -8,6 +9,7 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = Yii::t('rbac-admin', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
+AppAsset::register($this);
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>

@@ -4,7 +4,7 @@ namespace mdm\admin\controllers;
 
 use Yii;
 use mdm\admin\models\Route;
-use yii\web\Controller;
+use mdm\admin\Components\Yii2adminController;
 use yii\filters\VerbFilter;
 
 /**
@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class RouteController extends Controller
+class RouteController extends Yii2adminController
 {
     public function behaviors()
     {
@@ -29,6 +29,7 @@ class RouteController extends Controller
             ],
         ];
     }
+
     /**
      * Lists all Route models.
      * @return mixed
