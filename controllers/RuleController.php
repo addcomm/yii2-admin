@@ -17,7 +17,7 @@ use common\rules;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class RuleController extends \mdm\admin\Components\Yii2adminController
+class RuleController extends \mdm\admin\components\Yii2adminController
 {
 
     /**
