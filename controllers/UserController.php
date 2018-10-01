@@ -20,7 +20,7 @@ use yii\mail\BaseMailer;
 /**
  * User controller
  */
-class UserController extends \mdm\admin\Components\Yii2adminController
+class UserController extends \mdm\admin\components\Yii2adminController
 {
     private $_oldMailPath;
 
