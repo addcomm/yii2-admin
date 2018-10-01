@@ -15,7 +15,7 @@ use mdm\admin\components\Helper;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class MenuController extends \mdm\admin\Components\Yii2adminController
+class MenuController extends \mdm\admin\components\Yii2adminController
 {
 
     /**
