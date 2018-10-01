@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class AssignmentController extends \mdm\admin\Components\Yii2adminController
+class AssignmentController extends \mdm\admin\components\Yii2adminController
 {
     public $userClassName;
     public $idField = 'id';
