@@ -11,7 +11,7 @@ use yii\rbac\Item;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class PermissionController extends \mdm\admin\Components\Yii2adminController
+class PermissionController extends \mdm\admin\components\Yii2adminController
 {
 
     /**
