@@ -99,16 +99,19 @@ class ItemController extends \mdm\admin\components\Yii2adminController
 
         try{
 
-            foreach (Yii::$app->params['ADMIN-DEFAULT-ROUTES'] as $route){
+            if(isset(Yii::$app->params['ADMIN-DEFAULT-ROUTES'])){
 
-                $modelAuthItemChild         = new AuthItemChild();
-                $modelAuthItemChild->parent = $modelAuthItem->name;
-                $modelAuthItemChild->child  = $route;
-                $modelAuthItemChild->rights = 'read,write';
+                foreach (Yii::$app->params['ADMIN-DEFAULT-ROUTES'] as $route){
 
-                if(!$modelAuthItemChild->save()){
-                    throw new Exception(Tools::modelErrorsToString($modelAuthItemChild->getAttributes()));
+                    $modelAuthItemChild         = new AuthItemChild();
+                    $modelAuthItemChild->parent = $modelAuthItem->name;
+                    $modelAuthItemChild->child  = $route;
+                    $modelAuthItemChild->rights = 'read,write';
 
+                    if(!$modelAuthItemChild->save()){
+                        throw new Exception(Tools::modelErrorsToString($modelAuthItemChild->getAttributes()));
+
+                    }
                 }
             }
 
