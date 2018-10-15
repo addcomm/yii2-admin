@@ -75,3 +75,16 @@ return [
 [**More...**](docs/guide/configuration.md)
 
 [screenshots](https://goo.gl/r8RizT)
+
+### Adding some variables.
+
+Please add the folloring array in your environment params.php file.
+
+ADMIN-DEFAULT-ROUTES => ['/abc/']
+
+This array contains the list of routes that will be included by default each time that we create a new role.
+
+
+
+
+
