@@ -31,8 +31,7 @@ $this->registerJs($js);
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label><?=Yii::t('backend/role/update','LABEL_ROLE_NAME')?></label>
-                <input class="form-control" type="text" readonly value="<?=$model->name?>">
+               <?= $form->field($model, 'name')->textInput() ?>
             </div>
         </div>
         <div class="col-sm-6">
