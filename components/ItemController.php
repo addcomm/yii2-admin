@@ -80,12 +80,42 @@ class ItemController extends \mdm\admin\components\Yii2adminController
         $model = new AuthItem(null);
         $model->type = $this->type;
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
+             $this->_insertDefaultRoutes($model);
             return $this->redirect(['view', 'id' => $model->name]);
         } else {
             //get the routes related to this role.
             $modelRoutes = ArrayHelper::map(AuthItemChild::findAll(['parent'=>$model->name]),'child','rights');
             return $this->render('create', ['model' => $model,'modelRoutes'=>$modelRoutes]);
         }
+    }
+    
+    /**
+     * _insertDefaultRoutes
+     * @param AuthItem $modelAuthItem
+     * @throws Exception
+     */
+    protected function _insertDefaultRoutes(AuthItem $modelAuthItem) : void
+    {
+
+        try{
+
+            foreach (Yii::$app->params['ADMIN-DEFAULT-ROUTES'] as $route){
+
+                $modelAuthItemChild         = new AuthItemChild();
+                $modelAuthItemChild->parent = $modelAuthItem->name;
+                $modelAuthItemChild->child  = $route;
+                $modelAuthItemChild->rights = 'read,write';
+
+                if(!$modelAuthItemChild->save()){
+                    throw new Exception(Tools::modelErrorsToString($modelAuthItemChild->getAttributes()));
+
+                }
+            }
+
+        }catch (\Throwable $error){
+            throw new Exception( $error->getMessage());
+        }
+
     }
 
     /**
