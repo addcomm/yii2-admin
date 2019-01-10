@@ -28,9 +28,6 @@ unset($rules[RouteRule::RULE_NAME]);
     <div class="box">
         <div class="box-body">
             <div class="role-index">
-                <p>
-                    <?= Html::a(Yii::t('rbac-admin', 'Create ' . $labels['Item']), ['create'], ['class' => 'btn btn-success']) ?>
-                </p>
                 <?=
                 GridView::widget([
                     'dataProvider' => $dataProvider,
